@@ -8,7 +8,7 @@ module.exports = {
   devtool: 'eval-source-map',
   entry: [
     'webpack-hot-middleware/client?reload=true',
-    path.join(__dirname, 'src/app.jsx')
+    path.join(__dirname, 'src/client.jsx')
   ],
   resolve: {
     root: [
@@ -18,7 +18,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, '/public/'),
-    filename: '[name].js',
+    filename: 'bundle.js',
     publicPath: '/'
   },
   plugins: [
@@ -38,10 +38,42 @@ module.exports = {
     loaders: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,
-      loader: 'babel'
-    }, {
+      loader: 'babel',
+      query  :{
+          presets:['react','es2015']
+      }
+    }, 
+    {
       test: /\.css$/,
       loader: 'style!css'
-    }]
+    },
+    {
+      test: /\.woff$/,
+      loader: 'url',
+      query: {
+      limit: 5000,
+      mimetype: 'application/font-woff'
+      }
+    },
+    {
+      test: /\.woff2$/,
+      loader: 'url',
+      query: {
+      limit: 5000,
+      mimetype: 'application/font-woff'
+      }
+    },
+    {
+      test: /\.ttf$|\.eot$/,
+      loader: 'url?limit=100000',
+      query: {
+      name: 'font/[hash].[ext]'
+      }
+    },
+    {
+      test: /\.(jpg|png)$/,
+      loader: 'url?limit=25000'
+    }
+    ]
   }
 };
