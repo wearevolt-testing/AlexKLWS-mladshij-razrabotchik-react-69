@@ -4,7 +4,11 @@ import App from './app'
 import configureStore from './Redux/store'
 import {Provider} from 'react-redux'
 
-let initialState = {}
+let initialState = {
+	generalState:{
+		currentMainWidget: 2,
+	}
+};
 
 let store = configureStore (initialState)
 
