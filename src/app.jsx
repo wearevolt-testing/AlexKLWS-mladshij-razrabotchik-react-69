@@ -5,6 +5,9 @@ import { bindActionCreators } from 'redux';
 import actions from 'Redux/actions';
 import {Navbar, Nav, NavItem} from 'react-bootstrap';
 import MainView from './Components/mainView';
+import InvoiceWidget from './invoiceWidget';
+import ProductWidget from './productWidget';
+import CustomerWidget from './customerWidget';
 
 class App extends Component{
 
@@ -31,7 +34,10 @@ class App extends Component{
 							<NavItem eventKey={3} onClick = {this.handleWidgetSwitch.bind(this, 2)}>Customers</NavItem>
 						</Nav>
 				</Navbar>
-				<MainView actions = {this.props.actions} generalState = {this.props.generalState}/>
+				<Route path="/customers" component={CustomerWidget}/>
+		        <Route path="/invoices" component={InvoiceWidget}/>
+		        <Route path="/product" component={ProductWidget}/>
+				<MainView actions = {this.props.actions} generalState = {this.props.reducer.generalState}/>
 			</div>
 		);
 	}
