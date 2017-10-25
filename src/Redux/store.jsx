@@ -1,18 +1,18 @@
 import {applyMiddleware, compose, createStore, combineReducers} from 'redux';
-import reducer from './reducer';
+import reducer from './Reducers/index';
 import logger from 'redux-logger';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { routerMiddleware } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
+import DataService from './Services/dataService';
 
-export default function configureStore (initialState = { generalState: {}}, history) {
+export const history = createHistory();
 
-	const historyRouterMiddleware = routerMiddleware(history);
+export default function configureStore (initialState = {}) {
+
+	let historyRouterMiddleware = routerMiddleware(history);
 
 	return createStore (
-			combineReducers({
-				reducer, 
-				router: routerReducer, 
-				generalState: (state = {}) => state
-			}), 
+			reducer, 
 			initialState, 
-			applyMiddleware(logger, historyRouterMiddleware));
+			applyMiddleware(logger, historyRouterMiddleware, DataService));
 }

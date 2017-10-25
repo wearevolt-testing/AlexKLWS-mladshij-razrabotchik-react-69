@@ -2,21 +2,32 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
-import actions from 'Redux/actions';
+import basicActions from './Redux/Actions/basicActions';
+import apiActions from './Redux/Actions/apiActions';
 import {Navbar, Nav, NavItem} from 'react-bootstrap';
-import MainView from './Components/mainView';
-import InvoiceWidget from './invoiceWidget';
-import ProductWidget from './productWidget';
-import CustomerWidget from './customerWidget';
+import { Route, Switch } from 'react-router';
+import { push } from 'react-router-redux';
+import InvoiceWidget from './Components/invoiceWidget';
+import ProductWidget from './Components/productWidget';
+import CustomerWidget from './Components/customerWidget';
 
 class App extends Component{
 
-	showWindow(){}
-
-	hideWindow(){}
-
 	handleWidgetSwitch(index){
-		this.props.actions.switchMainWidget(index);
+		this.props.actions.basicActions.switchMainWidgetIndex(index);
+		switch(index){
+			case 0:
+				this.props.actions.routeActions.changeRoute('/invoices');
+				return;
+			case 1:
+				this.props.actions.routeActions.changeRoute('/product');
+				return;
+			case 2:
+				this.props.actions.routeActions.changeRoute('/customers');
+				return;
+			default:
+				return;
+		}
 	}
 
 	render(){
@@ -29,15 +40,38 @@ class App extends Component{
 						</Navbar.Brand>
 					</Navbar.Header>
 						<Nav>
-							<NavItem eventKey={1} onClick = {this.handleWidgetSwitch.bind(this, 0)}>Invoices</NavItem>
-							<NavItem eventKey={2} onClick = {this.handleWidgetSwitch.bind(this, 1)}>Products</NavItem>
-							<NavItem eventKey={3} onClick = {this.handleWidgetSwitch.bind(this, 2)}>Customers</NavItem>
+							<NavItem eventKey={1} onClick = {this.handleWidgetSwitch.bind(this, 0)}>
+								Invoices
+							</NavItem>
+							<NavItem eventKey={2} onClick = {this.handleWidgetSwitch.bind(this, 1)}>										
+								Products						
+							</NavItem>
+							<NavItem eventKey={3} onClick = {this.handleWidgetSwitch.bind(this, 2)}>		
+								Customers
+							</NavItem>
 						</Nav>
 				</Navbar>
-				<Route path="/customers" component={CustomerWidget}/>
-		        <Route path="/invoices" component={InvoiceWidget}/>
-		        <Route path="/product" component={ProductWidget}/>
-				<MainView actions = {this.props.actions} generalState = {this.props.reducer.generalState}/>
+				<div className="col-xs-12 col-sm-6 col-md-8">
+					<Switch>
+				        <Route path="/invoices" component={InvoiceWidget}/>
+				        <Route path="/product" 
+				        render={(props) => 
+				        	(<ProductWidget 
+				        		generalState={this.props.generalReducer} 
+				        		widgetState={this.props.productReducer}
+				        		actions={this.props.actions} 
+				        		{...props}/>)
+				        }/>
+				        <Route path="/customers" 
+				        render={(props) => 
+				        	(<CustomerWidget 
+				        		generalState={this.props.generalReducer}
+				        		widgetState={this.props.customerReducer}
+				        		actions={this.props.actions} 
+				        		{...props}/>)
+				        }/>
+			        </Switch>
+		        </div>
 			</div>
 		);
 	}
@@ -49,8 +83,12 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch) {
 	return {
-	actions: bindActionCreators(actions, dispatch)
-	}
+		actions: {
+			basicActions: bindActionCreators(basicActions, dispatch),
+			routeActions: bindActionCreators({changeRoute: (route) => push(route)}, dispatch),
+			apiActions: bindActionCreators(apiActions, dispatch),
+		}
+	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App);

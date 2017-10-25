@@ -1,36 +1,37 @@
 import React from 'react';
 import { render } from 'react-dom';
 import App from './app';
-import configureStore from './Redux/store';
+import configureStore, {history} from './Redux/store';
 import {Provider} from 'react-redux';
-import { ConnectedRouter, push, Route, Switch } from 'react-router-redux';
-import InvoiceWidget from './Components/invoiceWidget';
-import ProductWidget from './Components/productWidget';
-import CustomerWidget from './Components/customerWidget';
-import createHistory from 'history/createBrowserHistory';
+import { ConnectedRouter } from 'react-router-redux';
 
 let initialState = {
 	router:{},
-	reducer: {
-		generalState:{
-			currentMainWidget: 2,
-		}
+	generalReducer: {
+		currentMainWidget: 2,
+		modalIsShown: false,
+		deleteConfirmModalIsShown: false,
+		modalType: -1,
 	},
+	customerReducer: {
+		customer: {},
+		customerList: [],
+	},
+	productReducer: {
+		product: {},
+		productList: []
+	}
 };
 
-const history = createHistory();
-
-let store = configureStore (initialState, history);
+let store = configureStore (initialState);
 
 render(
 	<Provider store = {store}>
-		<div>
-			<ConnectedRouter history={history}>
-				<Switch>
-					<Route exact  path="/" component={App} />
-		        </Switch>
-		    </ConnectedRouter>
-	    </div>
+		<ConnectedRouter history={history}>
+			<div>
+				<App/>
+			</div>
+	    </ConnectedRouter>
 	</Provider>,
 	document.getElementById('app-root')
 );

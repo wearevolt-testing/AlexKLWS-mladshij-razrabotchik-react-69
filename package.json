@@ -14,14 +14,17 @@
     "lodash": "^4.17.4",
     "react": "^15.4.2",
     "react-bootstrap": "^0.31.3",
+    "react-document-title": "^2.0.3",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
     "react-router-redux": "^5.0.0-alpha.8",
     "react-select": "^1.0.0-beta13",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "sequelize": "^3.20.0",
-    "sqlite3": "^3.1.8"
+    "sqlite3": "^3.1.8",
+    "superagent": "^3.7.0"
   },
   "devDependencies": {
     "babel-core": "^6.3.21",
