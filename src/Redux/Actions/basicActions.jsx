@@ -1,10 +1,4 @@
 let basicActions = {
-	switchMainWidgetIndex(index){
-		return{
-			type: 'WIDGET_SWITCH',
-			index: index
-		}
-	},
 	displayModalWindow (id){
 		return{
 			type: 'MODAL_DISPLAY',

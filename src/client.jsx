@@ -8,9 +8,7 @@ import { ConnectedRouter } from 'react-router-redux';
 let initialState = {
 	router:{},
 	generalReducer: {
-		currentMainWidget: 2,
 		modalIsShown: false,
-		deleteConfirmModalIsShown: false,
 		modalType: -1,
 	},
 	customerReducer: {
@@ -19,7 +17,7 @@ let initialState = {
 	},
 	productReducer: {
 		product: {},
-		productList: []
+		productList: [],
 	}
 };
 

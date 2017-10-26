@@ -14,7 +14,6 @@ import CustomerWidget from './Components/customerWidget';
 class App extends Component{
 
 	handleWidgetSwitch(index){
-		this.props.actions.basicActions.switchMainWidgetIndex(index);
 		switch(index){
 			case 0:
 				this.props.actions.routeActions.changeRoute('/invoices');
