@@ -31,8 +31,10 @@ const DataService = store => next => action => {
             err
           })
         }
+        const data = JSON.parse(res.text);
         return next({
-          type: 'CREATE_CUSTOMER_DATA_SUCCESS'
+          type: 'CREATE_CUSTOMER_DATA_SUCCESS',
+          customer: data
         });
       })
     break;
@@ -47,8 +49,10 @@ const DataService = store => next => action => {
             err
           })
         }
+        const data = JSON.parse(res.text);
         return next({
-          type: 'UPDATE_CUSTOMER_DATA_SUCCESS'
+          type: 'UPDATE_CUSTOMER_DATA_SUCCESS',
+          customer: data
         });
       })
     break;
@@ -95,8 +99,10 @@ const DataService = store => next => action => {
             err
           })
         }
+        const data = JSON.parse(res.text);
         return next({
           type: 'CREATE_PRODUCT_DATA_SUCCESS',
+          product: data
         });
       })
     break;
@@ -111,8 +117,10 @@ const DataService = store => next => action => {
             err
           })
         }
+        const data = JSON.parse(res.text);
         return next({
           type: 'UPDATE_PRODUCT_DATA_SUCCESS',
+          product: data
         });
       })
     break;

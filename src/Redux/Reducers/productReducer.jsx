@@ -12,12 +12,12 @@ export default function productReducer(state = {}, action){
 		case 'SET_PRODUCT_PRICE':
 			return Object.assign({}, state, 
 				{product :  Object.assign({},state.product, {price: action.price})});
-		case 'CREATE_PRODUCT_DATA':
+		case 'CREATE_PRODUCT_DATA_SUCCESS':
 			let tempProducts = state.productList;
 			tempProducts.push(action.product);
 			return Object.assign({}, state, 
 				{productList : tempProducts});
-		case 'UPDATE_PRODUCT_DATA':
+		case 'UPDATE_PRODUCT_DATA_SUCCESS':
 			return Object.assign({}, state, {productList : state.productList.map((product) => {
 					return product.id === action.product.id ? 
 					Object.assign({}, product, 

@@ -31,7 +31,6 @@ class CreateCustomerWindow extends Component{
 					<Modal.Title>Create a customer</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<h2># {this.props.widgetState.customer.id}</h2>
 					<FormGroup
 					controlId="formBasicText">
 						<ControlLabel>Enter customer name</ControlLabel>

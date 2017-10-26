@@ -27,7 +27,6 @@ class CreateProductWindow extends Component{
 					<Modal.Title>Create a product</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<h2># {this.props.widgetState.product.id}</h2>
 					<FormGroup
 					controlId="formBasicText">
 						<ControlLabel>Enter product name</ControlLabel>

@@ -15,11 +15,11 @@ export default function customerReducer(state = {}, action){
 		case 'SET_CUSTOMER_PHONE':
 			return Object.assign({}, state, 
 					{customer :  Object.assign({}, state.customer, {phone: action.phone})});
-		case 'CREATE_CUSTOMER_DATA':
+		case 'CREATE_CUSTOMER_DATA_SUCCESS':
 			let tempCustomers = state.customerList;
 			tempCustomers.push(action.customer);
 			return Object.assign({}, state, {customerList : tempCustomers});
-		case 'UPDATE_CUSTOMER_DATA':
+		case 'UPDATE_CUSTOMER_DATA_SUCCESS':
 			return Object.assign({}, state, 
 					{customerList : state.customerList.map((customer) => {
 						return customer.id === action.customer.id ? 
